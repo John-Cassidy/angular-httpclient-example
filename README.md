@@ -44,3 +44,5 @@ ng generate component about
 ng add @angular/material
 
 ng generate service data
+
+ng generate interface product

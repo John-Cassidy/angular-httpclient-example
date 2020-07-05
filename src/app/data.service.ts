@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
+import { Product } from './product';
 
 @Injectable({
   providedIn: 'root',
@@ -30,8 +31,8 @@ export class DataService {
     //   .pipe(retry(3), catchError(this.handleError));
 
     return this.httpClient
-      .get(`${this.REST_API_SERVER}/products/`, {
-        params: new HttpParams({ fromString: '_page=1&_limit=20' }),
+      .get<Product[]>(`${this.REST_API_SERVER}/products/`, {
+        params: new HttpParams({ fromString: '_page=1&_limit=1' }),
         observe: 'response',
       })
       .pipe(
@@ -45,14 +46,16 @@ export class DataService {
   }
 
   public sendGetRequestToUrl(url: string) {
-    return this.httpClient.get(url, { observe: 'response' }).pipe(
-      retry(3),
-      catchError(this.handleError),
-      tap((res) => {
-        console.log(res.headers.get('Link'));
-        this.parseLinkHeader(res.headers.get('Link'));
-      })
-    );
+    return this.httpClient
+      .get<Product[]>(url, { observe: 'response' })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap((res) => {
+          console.log(res.headers.get('Link'));
+          this.parseLinkHeader(res.headers.get('Link'));
+        })
+      );
   }
 
   handleError(error: HttpErrorResponse) {

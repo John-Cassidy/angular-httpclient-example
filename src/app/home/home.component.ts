@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { HttpResponse } from '@angular/common/http';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  products = [];
+  products: Product[] = [];
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private dataService: DataService) {}
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.dataService
       .sendGetRequest()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: HttpResponse<any>) => {
+      .subscribe((res: HttpResponse<Product[]>) => {
         console.log(res);
         this.products = res.body;
       });
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.dataService
       .sendGetRequestToUrl(this.dataService.first)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: HttpResponse<any>) => {
+      .subscribe((res: HttpResponse<Product[]>) => {
         console.log(res);
         this.products = res.body;
       });
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.dataService
         .sendGetRequestToUrl(this.dataService.prev)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: HttpResponse<any>) => {
+        .subscribe((res: HttpResponse<Product[]>) => {
           console.log(res);
           this.products = res.body;
         });
@@ -59,7 +60,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.dataService
         .sendGetRequestToUrl(this.dataService.next)
         .pipe(takeUntil(this.destroy$))
-        .subscribe((res: HttpResponse<any>) => {
+        .subscribe((res: HttpResponse<Product[]>) => {
           console.log(res);
           this.products = res.body;
         });
@@ -70,7 +71,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.dataService
       .sendGetRequestToUrl(this.dataService.last)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res: HttpResponse<any>) => {
+      .subscribe((res: HttpResponse<Product[]>) => {
         console.log(res);
         this.products = res.body;
       });
