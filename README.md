@@ -42,3 +42,5 @@ ng generate component home
 ng generate component about
 
 ng add @angular/material
+
+ng generate service data
