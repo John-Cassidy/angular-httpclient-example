@@ -1,0 +1,40 @@
+<mat-table [dataSource]="dataSource">
+  <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+  <ng-container matColumnDef="policyNumber">
+    <mat-header-cell *matHeaderCellDef>Policy Number</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.policyNumber }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="creationDate">
+    <mat-header-cell *matHeaderCellDef>Creation Date</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.creationDate | date }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="expireDate">
+    <mat-header-cell *matHeaderCellDef>Expired Date</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.expireDate | date }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="policyAmount">
+    <mat-header-cell *matHeaderCellDef>Policy Amount</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.policyAmount | currency }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="clientId">
+    <mat-header-cell *matHeaderCellDef>Client ID</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.clientId }}
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="employeeId">
+    <mat-header-cell *matHeaderCellDef>Employee ID</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.employeeId }}
+    </mat-cell>
+  </ng-container>
+</mat-table>

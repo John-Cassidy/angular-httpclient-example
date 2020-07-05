@@ -7,6 +7,7 @@ import {
 import { throwError } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
 import { Product } from './product';
+import { Policy } from './policy';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,23 @@ export class DataService {
 
     return this.httpClient
       .get<Product[]>(`${this.REST_API_SERVER}/products/`, {
-        params: new HttpParams({ fromString: '_page=1&_limit=1' }),
+        params: new HttpParams({ fromString: '_page=1&_limit=20' }),
+        observe: 'response',
+      })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap((res) => {
+          console.log(res.headers.get('Link'));
+          this.parseLinkHeader(res.headers.get('Link'));
+        })
+      );
+  }
+
+  public getPolicies() {
+    return this.httpClient
+      .get<Policy[]>(`${this.REST_API_SERVER}/policies/`, {
+        params: new HttpParams({ fromString: '_page=1&_limit=20' }),
         observe: 'response',
       })
       .pipe(

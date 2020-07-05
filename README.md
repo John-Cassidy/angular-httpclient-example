@@ -1,7 +1,9 @@
 # AngularHttpclientExample
 
-Based on Article:
-[Angular 9/10 Tutorial By Example: REST CRUD APIs & HTTP GET Requests with HttpClient](https://www.techiediaries.com/angular/angular-9-8-tutorial-by-example-rest-crud-apis-http-get-requests-with-httpclient/)
+Based on Articles:
+[1. Angular 9/10 Tutorial By Example: REST CRUD APIs & HTTP GET Requests with HttpClient](https://www.techiediaries.com/angular/angular-9-8-tutorial-by-example-rest-crud-apis-http-get-requests-with-httpclient/)
+
+[Angular 9/8 Material Data-Table Tutorial & Example](https://www.techiediaries.com/angular-material-table/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.10.
 
@@ -46,3 +48,7 @@ ng add @angular/material
 ng generate service data
 
 ng generate interface product
+
+ng generate component dataTable
+
+ng generate interface policy
