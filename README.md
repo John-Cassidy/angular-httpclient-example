@@ -36,3 +36,9 @@ npm i -D prettier
 
 Use Faker.js to generate fake products to return via fake API server
 [Faker](https://github.com/marak/Faker.js/#api-methods)
+
+ng generate component home
+
+ng generate component about
+
+ng add @angular/material
