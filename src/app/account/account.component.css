@@ -1,0 +1,71 @@
+table {
+  width: 100%;
+}
+
+.mat-header-row {
+  height: auto;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+th.mat-header-cell:last-of-type {
+  padding-right: 24px;
+}
+
+.mat-sort-header-container {
+  display: inline-flex;
+}
+
+td.account {
+  color: #108ec8;
+  font-weight: bold;
+}
+th.account,
+.mat-header-cell:first-of-type {
+  font-weight: bold;
+  text-align: left;
+}
+
+th.right,
+td.right {
+  text-align: right;
+}
+
+.first-header-row th {
+  border-bottom: none;
+}
+
+.second-header-row-account {
+  font-style: italic;
+}
+
+.footer-row {
+  text-align: center;
+}
+
+.footer-row .mat-button {
+  color: #108ec8;
+  width: 100%;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.smaller {
+  font-size: smaller;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}

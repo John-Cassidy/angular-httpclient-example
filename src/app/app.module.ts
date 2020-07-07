@@ -13,7 +13,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { DataTableComponent } from './data-table/data-table.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { DataTableComponent } from './data-table/data-table.component';
     HomeComponent,
     AboutComponent,
     DataTableComponent,
+    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,8 @@ import { DataTableComponent } from './data-table/data-table.component';
     MatCardModule,
     MatProgressSpinnerModule,
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

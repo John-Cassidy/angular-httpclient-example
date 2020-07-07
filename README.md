@@ -52,3 +52,5 @@ ng generate interface product
 ng generate component dataTable
 
 ng generate interface policy
+
+ng generate component account

@@ -3,11 +3,13 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpParams,
+  HttpResponse,
 } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { retry, catchError, tap } from 'rxjs/operators';
 import { Product } from './product';
 import { Policy } from './policy';
+import { Account as MyAccount } from './account';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +52,86 @@ export class DataService {
     return this.httpClient
       .get<Policy[]>(`${this.REST_API_SERVER}/policies/`, {
         params: new HttpParams({ fromString: '_page=1&_limit=20' }),
+        observe: 'response',
+      })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap((res) => {
+          console.log(res.headers.get('Link'));
+          this.parseLinkHeader(res.headers.get('Link'));
+        })
+      );
+  }
+
+  public getAccountsLimited() {
+    return this.httpClient
+      .get<MyAccount[]>(`${this.REST_API_SERVER}/accounts/`, {
+        params: new HttpParams({ fromString: '_page=1&_limit=3' }),
+        observe: 'response',
+      })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap((res) => {
+          console.log(res.headers.get('Link'));
+          this.parseLinkHeader(res.headers.get('Link'));
+        })
+      );
+  }
+
+  public getAccountsAll() {
+    return this.httpClient
+      .get<MyAccount[]>(`${this.REST_API_SERVER}/accounts/`, {
+        params: new HttpParams({ fromString: '_page=1' }),
+        observe: 'response',
+      })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap((res) => {
+          console.log(res.headers.get('Link'));
+          this.parseLinkHeader(res.headers.get('Link'));
+        })
+      );
+  }
+
+  public getAccountsSort(
+    sortField,
+    sortOrder, // 'asc','desc',
+    pageNumber,
+    pageSize
+  ): Observable<HttpResponse<MyAccount[]>> {
+    // return this.http.get('/api/lessons', {
+    //     params: new HttpParams()
+    //         .set('courseId', courseId.toString())
+    //         .set('filter', filter)
+    //         .set('sortOrder', sortOrder)
+    //         .set('pageNumber', pageNumber.toString())
+    //         .set('pageSize', pageSize.toString())
+    // }).pipe(
+    //     map(res =>  res["payload"])
+    // );
+
+    let params: HttpParams;
+
+    if (pageNumber !== null) {
+      params = new HttpParams()
+        .set('_page', pageNumber.toString())
+        .set('_limit', pageSize.toString())
+        .set('_sort', sortField)
+        .set('_order', sortOrder);
+    } else {
+      params = new HttpParams()
+        .set('_page', '1')
+        .set('_limit', '10000000')
+        .set('_sort', sortField)
+        .set('_order', sortOrder);
+    }
+
+    return this.httpClient
+      .get<MyAccount[]>(`${this.REST_API_SERVER}/accounts/`, {
+        params: params,
         observe: 'response',
       })
       .pipe(
