@@ -17,9 +17,8 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit, AfterViewInit {
-  dataSource: MatTableDataSource<MyAccount> = new MatTableDataSource<
-    MyAccount
-  >();
+  dataSource: MatTableDataSource<MyAccount> =
+    new MatTableDataSource<MyAccount>();
   tableColumns: string[] = ['accountNumber', 'availableCash'];
 
   params = {

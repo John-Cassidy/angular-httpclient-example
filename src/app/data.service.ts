@@ -145,16 +145,14 @@ export class DataService {
   }
 
   public sendGetRequestToUrl(url: string) {
-    return this.httpClient
-      .get<Product[]>(url, { observe: 'response' })
-      .pipe(
-        retry(3),
-        catchError(this.handleError),
-        tap((res) => {
-          console.log(res.headers.get('Link'));
-          this.parseLinkHeader(res.headers.get('Link'));
-        })
-      );
+    return this.httpClient.get<Product[]>(url, { observe: 'response' }).pipe(
+      retry(3),
+      catchError(this.handleError),
+      tap((res) => {
+        console.log(res.headers.get('Link'));
+        this.parseLinkHeader(res.headers.get('Link'));
+      })
+    );
   }
 
   handleError(error: HttpErrorResponse) {
