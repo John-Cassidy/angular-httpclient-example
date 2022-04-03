@@ -36,9 +36,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Install Prettier
 npm i -D prettier
 
-Use Faker.js to generate fake products to return via fake API server
-[Faker](https://github.com/marak/Faker.js/#api-methods)
-
 ng generate component home
 
 ng generate component about
@@ -54,3 +51,19 @@ ng generate component dataTable
 ng generate interface policy
 
 ng generate component account
+
+### Faker
+
+Use Faker.js to generate fake products to return via fake API server
+[Faker](https://github.com/marak/Faker.js/#api-methods)
+
+NOTE: Removal of functional code in faker.js
+
+[GitHub Guidance](https://github.com/advisories/GHSA-5w9c-rv96-fr7g)
+
+[Faker Replacement package and installation instructions](https://github.com/faker-js/faker)
+
+Please replace your faker dependency with @faker-js/faker. This is the official, stable fork of Faker.
+
+> npm uninstall faker
+> npm install @faker-js/faker
